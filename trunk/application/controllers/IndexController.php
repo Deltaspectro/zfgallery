@@ -9,11 +9,20 @@ class IndexController extends Zend_Controller_Action
     //	$this->getHelper('viewRenderer')->setNoRender();
     }
 
+    
+ /**
+  * Copy picture from FTP folder to images folder
+  * get exif data
+  * Convert 'real' jpg
+  * thumbnail
+  */
     public function indexAction()
     {
         // action body
-
-
+    
+    if (!copy('ftp/kep.jpg', 'images/kep.jpg')) {
+    echo "failed to copy $file...\n";
+}
 				try
 				{
 				    	
