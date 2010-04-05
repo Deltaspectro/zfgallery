@@ -1,0 +1,17 @@
+<h1>Gallery page</h1>
+
+<?php echo "Current pic: ".$this->filename; ?> <br></br>
+
+<a href='<?php echo $this->baseUrl(); ?>/picture/createthumbnail/picturename/<?php echo $this->filename; ?> >Create thumbnail!</a>
+ 
+<br></br>
+ 
+ <?php 
+ 
+foreach ($this->imagesfilearray as $item){
+//echo "picname: $item <img src='images/thumbnails/$item' />";
+
+echo "picname: $item, ";
+}
+
+ ?>
