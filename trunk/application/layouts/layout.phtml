@@ -50,33 +50,22 @@ $ns = new Zend_Session_Namespace('mekkelek_Auth');
 <ul id='mainmenulist'>	
 <li><a href='<?php echo $this->baseUrl(); ?>/index/'>Főoldal</a></li>
 
-<li><a href='<?php echo $this->baseUrl(); ?>/user/list'>Felhasználók listája</a></li>				
+			
 <?php						
 if(empty ($ns->storage)){
 	?>
    <li><a href='<?php echo $this->baseUrl(); ?>/user/login'>Belépés</a></li>
-   <li><a href='<?php echo $this->baseUrl(); ?>/user/create/usertype/server'>Vállalkozó létrehozása </a></li>
-   <li><a href='<?php echo $this->baseUrl(); ?>/user/create/usertype/client'>Megbízó létrehozása </a></li>
+
 <?php }else{ ?>
   <li> Belépve: <?php echo $ns->storage->name; ?>
  (id: <?php echo $ns->storage->id; ?>)
   <a href='<?php echo $this->baseUrl(); ?>/user/logout'>Kilépés</a></li>
-   <li><a href='<?php echo $this->baseUrl(); ?>/user/index/id/<?php echo $ns->storage->id;?>'>Saját profil nézete</a></li>
- <li><a href='<?php echo $this->baseUrl(); ?>/user/update/id/<?php echo $ns->storage->id;?>'>Saját profil módosítása</a></li>
- <li><a href='<?php echo $this->baseUrl(); ?>/user/password/id/<?php echo $ns->storage->id;?>'>Jelszó módosítása</a></li>
-<?php  if($ns->storage->usertype=='client'){ ?>
- <li><a href='<?php echo $this->baseUrl(); ?>/order'>Megbízásaim</a></li>	
-<?php 
-  }
-  else{
-  	?>
-   <li><a href='<?php echo $this->baseUrl(); ?>/message/getmessage'>Megrendelésekkel kapcsolatos üzenetek</a></li>
   	<?php 
   }
-}
+
 ?>
 
- <li><a href='<?php echo $this->baseUrl(); ?>'>Összes Megbízás, Google-barát lista</a></li>						
+  <a href='<?php echo $this->baseUrl(); ?>/picture/index'>Create Thumbnail Picture</a></li>			
 					
 </ul>
 
