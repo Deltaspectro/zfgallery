@@ -1,0 +1,93 @@
+<?php 
+header('Content-Type: text/html; charset=utf-8');
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+//Már modosították
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+//HTTP/1.0
+header("Pragma: no-cache"); 
+//proxy	
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<?php echo $this->headTitle();?>
+
+<meta name="keywords" content="munka, árajánlat" />
+<meta name="description" content="" />
+
+<?php echo $this->headScript()->prependFile($this->baseUrl().'/js/jquery-1.4.2.js');?>
+<?php echo $this->headScript()->prependFile($this->baseUrl().'/js/mekkelek.js');?>
+
+
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/default.css'); ?>
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/layout.css'); ?>
+<?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/mekkelek.css'); ?>
+
+
+<style type="text/css">
+#mainmenulist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}
+
+</style>
+</head>
+<body class="homepage">
+	
+<?php 
+
+$ns = new Zend_Session_Namespace('mekkelek_Auth'); 
+//echo  $ns->storage->role;
+?>
+						
+<div id="page" class="container">
+<ul id='mainmenulist'>	
+<li><a href='<?php echo $this->baseUrl(); ?>/index/'>Főoldal</a></li>
+
+<li><a href='<?php echo $this->baseUrl(); ?>/user/list'>Felhasználók listája</a></li>				
+<?php						
+if(empty ($ns->storage)){
+	?>
+   <li><a href='<?php echo $this->baseUrl(); ?>/user/login'>Belépés</a></li>
+   <li><a href='<?php echo $this->baseUrl(); ?>/user/create/usertype/server'>Vállalkozó létrehozása </a></li>
+   <li><a href='<?php echo $this->baseUrl(); ?>/user/create/usertype/client'>Megbízó létrehozása </a></li>
+<?php }else{ ?>
+  <li> Belépve: <?php echo $ns->storage->name; ?>
+ (id: <?php echo $ns->storage->id; ?>)
+  <a href='<?php echo $this->baseUrl(); ?>/user/logout'>Kilépés</a></li>
+   <li><a href='<?php echo $this->baseUrl(); ?>/user/index/id/<?php echo $ns->storage->id;?>'>Saját profil nézete</a></li>
+ <li><a href='<?php echo $this->baseUrl(); ?>/user/update/id/<?php echo $ns->storage->id;?>'>Saját profil módosítása</a></li>
+ <li><a href='<?php echo $this->baseUrl(); ?>/user/password/id/<?php echo $ns->storage->id;?>'>Jelszó módosítása</a></li>
+<?php  if($ns->storage->usertype=='client'){ ?>
+ <li><a href='<?php echo $this->baseUrl(); ?>/order'>Megbízásaim</a></li>	
+<?php 
+  }
+  else{
+  	?>
+   <li><a href='<?php echo $this->baseUrl(); ?>/message/getmessage'>Megrendelésekkel kapcsolatos üzenetek</a></li>
+  	<?php 
+  }
+}
+?>
+
+ <li><a href='<?php echo $this->baseUrl(); ?>'>Összes Megbízás, Google-barát lista</a></li>						
+					
+</ul>
+
+
+<?php echo $this->layout()->content; ?>
+</div>
+
+
+	<?php 
+    $this->addScriptPath(APPLICATION_PATH . '/views/scripts');
+    echo $this->render('util/profiler.phtml');
+?>
+</body>
+</html>

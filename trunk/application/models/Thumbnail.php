@@ -149,7 +149,7 @@ class Model_Thumbnail {
                     $this->oldImage = ImageCreateFromGif($this->fileName);
                     break;
                 case 'JPG':
-                    $this->oldImage = ImageCreateFromJpeg($this->fileName);
+                    $this->oldImage = @ImageCreateFromJpeg($this->fileName);
                     break;
                 case 'PNG':
                     $this->oldImage = ImageCreateFromPng($this->fileName);
