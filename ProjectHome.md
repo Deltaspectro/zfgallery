@@ -1,0 +1,1 @@
+Easy picture gallery with zend framework. Upload, generate thumbnails. Using ACL to limit the public access. Ideal for family picture to share
